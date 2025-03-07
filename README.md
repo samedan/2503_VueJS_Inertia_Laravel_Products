@@ -2,6 +2,14 @@
 
 > https://gist.github.com/edomaru/c593651692bfa2f11a7843627656a731
 
+### This Git
+
+> https://github.com/samedan/2503_VueJS_Inertia_Laravel_Products
+
+### Udemy
+
+> https://www.udemy.com/course/laravel-vuejs-fullstack-web-development/learn/lecture/42801270#questions
+
 ### Category Model
 
 ### Product Model, Factory, etc
@@ -47,3 +55,30 @@ Route::middleware('auth')->group(function () {
 ### Remove 'data' from response
 
 > AppServiceProvider.php -> JsonResource::withoutWrapping();
+
+### Create Product Form
+
+> /resources/js/Pages/Product/Create.vue
+
+# Validation
+
+> StoreProductRequest.php
+
+# Store in ProudctController
+
+```
+public function store(StoreProductRequest $request)
+    {
+        $request->user()->products()->create($request->validated());
+
+        // reload page
+        return redirect()->route('products.index');
+
+    }
+```
+
+### Error change backend returned text
+
+> StoreproductRequest.php -> public function attributes()
+
+> ![Error rename](https://github.com/samedan/2503_VueJS_Inertia_Laravel_Products/blob/main/_printscreens/01_printscreen.jpg)
