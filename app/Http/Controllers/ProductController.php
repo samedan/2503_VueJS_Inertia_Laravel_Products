@@ -63,15 +63,21 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return inertia('Product/Edit', [
+            'categories' => CategoryResource::collection(Category::orderBy('name')->get()),
+            'product' => ProductResource::make($product)
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
+    // public function update(UpdateProductRequest $request, Product $product)
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->validated());
+        return redirect()->route('products.index');
+
     }
 
     /**

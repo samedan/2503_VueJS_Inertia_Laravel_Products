@@ -116,10 +116,15 @@ defineProps({
                                             class="font-medium text-gray-600 hover:underline"
                                             >Show</Link
                                         >
-                                        <a
-                                            href="#"
+                                        <Link
+                                            :href="
+                                                route(
+                                                    'products.edit',
+                                                    product.id
+                                                )
+                                            "
                                             class="font-medium text-blue-600 hover:underline"
-                                            >Edit</a
+                                            >Edit</Link
                                         >
                                         <a
                                             href="#"
