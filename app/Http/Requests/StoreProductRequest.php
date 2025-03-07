@@ -39,10 +39,10 @@ class StoreProductRequest extends FormRequest
     }
 
     // Change Cents to dollar
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'price' => $this->price * 100,
-        ]);
-    }
+    // public function prepareForValidation()
+    // {
+    //     $this->merge([
+    //         'price' => $this->price * 100,
+    //     ]);
+    // }
 }

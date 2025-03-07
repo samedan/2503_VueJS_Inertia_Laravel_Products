@@ -82,3 +82,5 @@ public function store(StoreProductRequest $request)
 > StoreproductRequest.php -> public function attributes()
 
 > ![Error rename](https://github.com/samedan/2503_VueJS_Inertia_Laravel_Products/blob/main/_printscreens/01printscreen.jpg)
+
+### Chaneg price before writing to DBB
