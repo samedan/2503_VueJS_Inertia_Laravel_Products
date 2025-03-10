@@ -18,7 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = auth()->user()->products()->latest()->get();
+        $products = auth()->user()->products()->latest()->paginate(10);
+        // return ProductResource::collection($products);
         // return Inertia::render('Product/Index');
         return inertia('Product/Index', [
             'products' => ProductResource::collection($products)

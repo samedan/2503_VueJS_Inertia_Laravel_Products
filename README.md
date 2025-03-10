@@ -94,3 +94,9 @@ public function store(StoreProductRequest $request)
 # Authenticatedlayout.vue
 
 > <div v-if="$page.props.toast.message">...
+
+### Pagination for products
+
+> ProductController.php -> $products = auth()->user()->products()->latest()->paginate(10);
+
+> ![Pagination](https://github.com/samedan/2503_VueJS_Inertia_Laravel_Products/blob/main/_printscreens/02printscreen.jpg)
