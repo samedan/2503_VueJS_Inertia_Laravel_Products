@@ -84,3 +84,13 @@ public function store(StoreProductRequest $request)
 > ![Error rename](https://github.com/samedan/2503_VueJS_Inertia_Laravel_Products/blob/main/_printscreens/01printscreen.jpg)
 
 ### Chaneg price before writing to DBB
+
+### Toasts
+
+> ProductController.php -> with('message', 'x')
+
+> app/Http/Middleware/HandleInertiaRequests.php -> 'toast'
+
+# Authenticatedlayout.vue
+
+> <div v-if="$page.props.toast.message">...
