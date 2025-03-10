@@ -85,6 +85,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        // return back(); // return to prevcious page
+        return redirect()->route('products.index');
     }
 }

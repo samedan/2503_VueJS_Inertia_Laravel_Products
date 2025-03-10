@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 
 defineProps({
     products: {
@@ -8,6 +8,14 @@ defineProps({
         required: true,
     },
 });
+
+const deleteRow = (id) => {
+    if (window.confirm("Are you sure?")) {
+        router.delete(route("products.destroy", id), {
+            preserveScroll: true,
+        });
+    }
+};
 </script>
 
 <template>
@@ -57,34 +65,6 @@ defineProps({
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b hover:bg-gray-50">
-                                    <td
-                                        scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                                    >
-                                        Apple MacBook Pro 16"
-                                    </td>
-                                    <td class="px-6 py-4">Laptop</td>
-                                    <td class="px-6 py-4">$2999</td>
-                                    <td class="px-6 py-4">2100</td>
-                                    <td class="px-6 py-4 space-x-2">
-                                        <a
-                                            href="#"
-                                            class="font-medium text-gray-600 hover:underline"
-                                            >Show</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="font-medium text-blue-600 hover:underline"
-                                            >Edit</a
-                                        >
-                                        <a
-                                            href="#"
-                                            class="font-medium text-red-600 hover:underline"
-                                            >Delete</a
-                                        >
-                                    </td>
-                                </tr>
                                 <tr
                                     v-for="product in products"
                                     :key="product.id"
@@ -129,6 +109,9 @@ defineProps({
                                         <a
                                             href="#"
                                             class="font-medium text-red-600 hover:underline"
+                                            @click.prevent="
+                                                deleteRow(product.id)
+                                            "
                                             >Delete</a
                                         >
                                     </td>
