@@ -106,3 +106,11 @@ public function store(StoreProductRequest $request)
 > ProductController.php -> index()
 
 > /resources/js/Pages/Product.Index.vue -> input
+
+### Sorting with column clicks
+
+> ProductController.php -> public function index()
+
+# Frontend
+
+> /resources/js/Components/Sortable.vue
