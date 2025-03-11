@@ -1,11 +1,25 @@
 <script setup>
 import Modal from "@/Components/Modal.vue";
+import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
     show: {
         type: Boolean,
         default: false,
     },
+    products: {
+        type: Array,
+        required: true,
+    },
+    categories: {
+        type: Array,
+        required: true,
+    },
+});
+
+const form = useForm({
+    product_ids: [],
+    category_id: "",
 });
 
 const emit = defineEmits(["close"]);
@@ -52,7 +66,11 @@ const emit = defineEmits(["close"]);
                             >Products</label
                         >
                         <ul>
-                            <li class="flex items-center">
+                            <li
+                                class="flex items-center"
+                                v-for="product in products"
+                                :key="product.id"
+                            >
                                 <svg
                                     class="w-3.5 h-3.5 me-2 text-cyan-500 flex-shrink-0"
                                     aria-hidden="true"
@@ -64,21 +82,7 @@ const emit = defineEmits(["close"]);
                                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
                                     />
                                 </svg>
-                                At least one lowercase character
-                            </li>
-                            <li class="flex items-center">
-                                <svg
-                                    class="w-3.5 h-3.5 me-2 text-cyan-500 flex-shrink-0"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path
-                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
-                                    />
-                                </svg>
-                                At least one lowercase character
+                                {{ product.name }}
                             </li>
                         </ul>
                     </div>
@@ -90,13 +94,18 @@ const emit = defineEmits(["close"]);
                         >
                         <select
                             name="category_id"
+                            v-model="form.category_id"
                             id="category_id"
-                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-                            required=""
+                            class="shadow-sm border text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
                         >
-                            <option value="">Category 1</option>
-                            <option value="">Category 2</option>
-                            <option value="">Category 3</option>
+                            <option value="">Select a category</option>
+                            <option
+                                v-for="category in categories"
+                                :key="category.id"
+                                :value="category.id"
+                            >
+                                {{ category.name }}
+                            </option>
                         </select>
                     </div>
                 </div>

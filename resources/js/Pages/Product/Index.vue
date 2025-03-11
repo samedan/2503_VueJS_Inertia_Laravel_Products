@@ -4,7 +4,7 @@ import Sortable from "@/Components/Sortable.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import CheckAll from "@/Components/CheckAll.vue";
 import BulkEdit from "./BulkEdit.vue";
 
@@ -23,6 +23,16 @@ const props = defineProps({
             search: "",
         }),
     },
+    categories: {
+        type: Array,
+        required: true,
+    },
+});
+
+const selectedProducts = computed(() => {
+    return props.products.data
+        .filter((product) => selectedIds.value.includes(product.id))
+        .map((product) => ({ id: product.id, name: product.name }));
 });
 
 const deleteRow = (id) => {
@@ -77,7 +87,8 @@ const deleteSelected = () => {
                 <div
                     class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-6"
                 >
-                    {{ selectedIds }}
+                    {{ selectedIds }}<br />
+                    {{ selectedProducts }}
                     <div class="space-x-3">
                         <button
                             type="button"
@@ -248,6 +259,11 @@ const deleteSelected = () => {
                 </div>
             </div>
         </div>
-        <BulkEdit :show="showModal" @close="showModal = false" />
+        <BulkEdit
+            :show="showModal"
+            @close="showModal = false"
+            :products="selectedProducts"
+            :categories="categories"
+        />
     </AuthenticatedLayout>
 </template>
