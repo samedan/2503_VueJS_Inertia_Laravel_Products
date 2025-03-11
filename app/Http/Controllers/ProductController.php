@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -18,11 +17,25 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = auth()->user()->products()->latest()->paginate(10);
+        $products = auth()->user()
+            ->products()
+            ->latest()
+            ->with('category') // eager loading
+            ->where(function ($query) {
+                if($search = request()->search) {
+                    $query->where('name', 'like', '%'.$search.'%')
+                        ->orWhereHas('category', function($query) use ($search) {
+                            $query->where('name', 'like', '%'.$search.'%');
+                        });
+                }
+            })
+            ->paginate(10)
+            ->withQueryString(); // keep the search results
         // return ProductResource::collection($products);
         // return Inertia::render('Product/Index');
         return inertia('Product/Index', [
-            'products' => ProductResource::collection($products)
+            'products' => ProductResource::collection($products),
+            'query' => (object) request()->query()
         ]);
     }
 

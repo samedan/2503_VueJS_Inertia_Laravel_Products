@@ -100,3 +100,9 @@ public function store(StoreProductRequest $request)
 > ProductController.php -> $products = auth()->user()->products()->latest()->paginate(10);
 
 > ![Pagination](https://github.com/samedan/2503_VueJS_Inertia_Laravel_Products/blob/main/_printscreens/02printscreen.jpg)
+
+### Search
+
+> ProductController.php -> index()
+
+> /resources/js/Pages/Product.Index.vue -> input
