@@ -114,3 +114,30 @@ public function store(StoreProductRequest $request)
 # Frontend
 
 > /resources/js/Components/Sortable.vue
+
+### CheckBox
+
+> /resources/js/Components/Checkbox.vue
+
+> Index.vue
+
+```
+<Checkbox
+                                            :value="product.id"
+                                            v-model:checked="selectedIds"
+                                        />
+```
+
+> ![checked](https://github.com/samedan/2503_VueJS_Inertia_Laravel_Products/blob/main/_printscreens/03printscreen.jpg)
+
+### Multi Checkbox
+
+> resources/js/Components/CheckAll.vue
+
+# Action
+
+> ProductController.php -> public function bulkdestroy()
+
+> web.php -> Route::delete('/products/{ids}/bulk', [ProductController::class, 'bulkDestroy']);
+
+> Index.vue -> deleteSelected()

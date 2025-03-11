@@ -115,4 +115,16 @@ class ProductController extends Controller
         // return back(); // return to prevcious page
         return redirect()->route('products.index')->with('message', 'Product has been deleted.');
     }
+
+    /**
+     * Removes MULTI resources from storage.
+     */
+    public function bulkdestroy(string $ids)
+    {
+        // 123,125,165 => ['123', '125', '165']
+        $ids = explode(',', $ids);
+        Product::destroy($ids);
+        // return back(); // return to prevcious page
+        return redirect()->route('products.index')->with('message', 'Selected product have been deleted.');
+    }
 }
