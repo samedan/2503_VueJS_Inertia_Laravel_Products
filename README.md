@@ -141,3 +141,7 @@ public function store(StoreProductRequest $request)
 > web.php -> Route::delete('/products/{ids}/bulk', [ProductController::class, 'bulkDestroy']);
 
 > Index.vue -> deleteSelected()
+
+### Bulk edit
+
+> /resources/js/Pages/Product/BulkEdit.vue
