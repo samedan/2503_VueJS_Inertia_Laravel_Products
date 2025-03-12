@@ -262,6 +262,7 @@ const deleteSelected = () => {
         <BulkEdit
             :show="showModal"
             @close="showModal = false"
+            @updated="selectedIds = []"
             :products="selectedProducts"
             :categories="categories"
         />
